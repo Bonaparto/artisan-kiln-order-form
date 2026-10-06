@@ -2,6 +2,9 @@
 
 Реализация [тестового задания](https://gitlab.com/tile-expert-test-tasks/frontend): одностраничная форма заказа плитки с корзиной, визуализатором раскладки 7×7 и оформлением заказа. Мобильная и десктопная версии свёрстаны по макетам.
 
+- **Демо:** https://artisan-kiln-order-form.vercel.app
+- **Репозиторий:** https://github.com/Bonaparto/artisan-kiln-order-form
+
 |                    Desktop (1376 px)                    |                    Mobile (390 px)                    |
 | :-----------------------------------------------------: | :---------------------------------------------------: |
 | <img src="docs/desktop.webp" alt="Desktop" width="560"> | <img src="docs/mobile.webp" alt="Mobile" width="180"> |
