@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useId, useState, type Ref } from 'react';
 import { TileArt, type TileId } from '@/entities/tile';
 import { CloseIcon } from '@/shared/icons';
+import { ClayDiamondTile } from '@/shared/illustrations';
 import { cn } from '@/shared/lib/cn';
 import { formatMoney } from '@/shared/lib/money';
 import { Dialog } from '@/shared/ui/Dialog';
@@ -15,22 +16,6 @@ interface AddTileButtonProps {
   onAdded?: (tileId: TileId) => void;
   className?: string;
   ref?: Ref<HTMLButtonElement>;
-}
-
-/** The terracotta tile with an indigo diamond drawn on the button in the mockups. */
-function ClayDiamondTile({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden className={className}>
-      <rect x="0.75" y="0.75" width="22.5" height="22.5" className="fill-terracotta stroke-ink" strokeWidth={1.5} />
-      <path
-        d="M12 3Q14 10 21 12Q14 14 12 21Q10 14 3 12Q10 10 12 3Z"
-        fill="none"
-        className="stroke-navy"
-        strokeWidth={1.8}
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
 }
 
 /** "Add new tile to cart" plus the picker of catalog tiles that are not in the cart yet. */
@@ -67,7 +52,7 @@ export function AddTileButton({ onAdded, className, ref }: AddTileButtonProps) {
         <span aria-hidden className="u-text-16 leading-none font-semibold lg:text-[21px]">
           +
         </span>
-        <ClayDiamondTile className="u-mr-2 u-size-16 shrink-0 lg:mr-[2px] lg:size-[21px]" />
+        <ClayDiamondTile className="u-mr-1 u-size-18 shrink-0 lg:mr-[2px] lg:size-[21px]" />
         <span className="text-left u-text-11.5 leading-[0.92] font-semibold whitespace-nowrap uppercase lg:text-[15px]">
           Add new tile
           <br />

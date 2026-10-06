@@ -6,6 +6,17 @@ import { leafPath } from '@/shared/lib/geometry';
  * printed-sticker style. Everything here is aria-hidden.
  */
 
+export {
+  ClayDiamondTile,
+  HandCarryingTile,
+  HandsHoldingTile,
+  HandWithPalette,
+  HandWithTile,
+  KilnBuilding,
+  KilnOven,
+  TileSprig,
+} from './traced';
+
 type Props = SVGProps<SVGSVGElement>;
 const deco = { 'aria-hidden': true, focusable: false } as const;
 /** Fill class + the shared ink outline. */
@@ -24,45 +35,6 @@ export function WindowDots({ className }: { className?: string }) {
         <span key={color} className={`u-size-10 rounded-full border-[1.5px] border-ink lg:size-[13px] ${color}`} />
       ))}
     </span>
-  );
-}
-
-/** Columned "artisan" building with a kiln mouth — left of the page title. */
-export function KilnBuilding(props: Props) {
-  return (
-    <svg viewBox="0 0 58 80" {...deco} {...props}>
-      <path d="M4 23 29 5l25 18z" {...inked('fill-sage', 1.8)} />
-      <circle cx="29" cy="16" r="2.6" {...inked('fill-cream-light', 1.2)} />
-      <rect x="4" y="23" width="50" height="5" {...inked('fill-sage', 1.6)} />
-      {[9.5, 20, 30.5, 41].map((x) => (
-        <rect key={x} x={x} y="28" width="7" height="17" {...inked('fill-sage', 1.4)} />
-      ))}
-      <rect x="2" y="45" width="54" height="4.5" {...inked('fill-sage', 1.6)} />
-      <rect x="5" y="49.5" width="48" height="28" {...inked('fill-mustard', 1.8)} />
-      <path d="M17 77.5V64a12 12 0 0 1 24 0v13.5z" {...inked('fill-cream-light', 1.6)} />
-      <path d="M19.5 65.5h19M19 69.5h20M19 73.5h20" {...inked('', 1.2)} />
-      <path d="M1 78.2h56" {...inked('', 2)} />
-    </svg>
-  );
-}
-
-/** Arched kiln with a flame — right of the page title. */
-export function KilnOven(props: Props) {
-  return (
-    <svg viewBox="0 0 66 76" {...deco} {...props}>
-      <path d="M58 41h6M58 46.5h6M58 52h6" {...inked('', 1.8)} />
-      <path d="M6 73V32a26 26 0 0 1 52 0v41z" {...inked('fill-terracotta', 2)} />
-      <path d="M16.5 66V36.5a15.5 15.5 0 0 1 31 0V66z" {...inked('fill-cream-light', 1.6)} />
-      <path
-        d="M32 63c-10-2-12-11-7.5-17.5 1 4.5 3.5 6 5 5.5-2.5-7 1-13 6.5-16.5-.5 6.5 5 9 5.5 15 1.5-2 2-4 1.5-6.5 4.5 5.5 3 17-11 20z"
-        {...inked('fill-mustard', 1.4)}
-      />
-      <path
-        d="M32.5 61c-5-1.5-5.5-6.5-3-9.5 1 2.5 2.5 3 3.5 2.5-1-3.5 1-6.5 3.5-8 0 4 3 6 2.5 9.5S36 61 32.5 61z"
-        className="fill-terracotta"
-      />
-      <path d="M3 73.2h60" {...inked('', 2.2)} />
-    </svg>
   );
 }
 

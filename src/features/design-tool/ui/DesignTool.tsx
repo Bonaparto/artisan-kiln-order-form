@@ -3,7 +3,7 @@
 import { useDndMonitor } from '@dnd-kit/core';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useId, useState, type KeyboardEvent } from 'react';
-import { HandCarryingTile } from '@/shared/illustrations/hands';
+import { HandCarryingTile } from '@/shared/illustrations';
 import { cn } from '@/shared/lib/cn';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { toolCleared } from '../model/designSlice';
@@ -51,9 +51,6 @@ export function DesignTool({ className }: { className?: string }) {
           <BoardScroller>
             <DesignGrid />
           </BoardScroller>
-          <div aria-hidden className="relative h-[25px] border-t-[1.5px] border-ink">
-            <span className="absolute top-1/2 left-1/2 h-[11px] w-[58px] -translate-1/2 rounded-full border border-ink bg-navy" />
-          </div>
         </div>
         <DesignPalette />
       </div>
@@ -66,7 +63,7 @@ export function DesignTool({ className }: { className?: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16, transition: { duration: 0.25 } }}
             transition={{ delay: 0.4, type: 'spring', stiffness: 160, damping: 18 }}
-            className="pointer-events-none absolute top-[57%] left-[44%] z-10 w-[37%]"
+            className="pointer-events-none absolute top-[57.3%] left-[44.6%] z-10 w-[37.65%]"
           >
             <HandCarryingTile className="w-full" />
           </motion.div>

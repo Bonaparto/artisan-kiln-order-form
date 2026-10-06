@@ -41,10 +41,10 @@ export function TopBar() {
       <div className="relative ml-auto flex shrink-0 items-center">
         <a
           href="#cart"
-          className="relative block"
+          className="relative block lg:-translate-y-[1.5px]"
           aria-label={`Cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}
         >
-          <CartIcon className="u-h-21 u-w-25 lg:h-[24px] lg:w-[28px]" />
+          <CartIcon className="u-h-18.5 u-w-20.5 lg:h-[22.75px] lg:w-[25.25px]" />
           <AnimatePresence initial={false} mode="popLayout">
             <motion.span
               key={cartCount}
@@ -53,13 +53,13 @@ export function TopBar() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.4, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 600, damping: 22 }}
-              className="absolute u-top-n-4 u-right-n-4 grid u-size-12 place-items-center rounded-full border border-ink bg-mustard u-text-8 leading-none font-bold lg:-top-1.5 lg:-right-1.5 lg:size-[17px] lg:border-[1.5px] lg:text-[11px]"
+              className="absolute u-top-n-3.5 u-right-n-5 grid u-size-11.5 place-items-center rounded-full border border-ink bg-mustard u-text-8 leading-none font-bold lg:-top-[6px] lg:-right-[10px] lg:size-[17px] lg:border-[1.5px] lg:text-[11px]"
             >
               {cartCount}
             </motion.span>
           </AnimatePresence>
         </a>
-        <AvatarIcon className="u-ml-19 u-size-20 lg:ml-2.5 lg:size-[27px]" />
+        <AvatarIcon className="u-ml-23 u-size-20.75 lg:ml-[27.5px] lg:size-[27px]" />
         <a
           href="#"
           className="u-ml-7 u-rounded-4 border border-ink bg-navy u-px-5 u-py-2.5 u-text-12 leading-none font-medium whitespace-nowrap text-cream-light transition-colors hover:bg-navy-dark lg:hidden"
@@ -69,7 +69,7 @@ export function TopBar() {
         <a
           href="#"
           aria-label="Account: A. Smith"
-          className="ml-2.5 hidden rounded-[5px] border-[1.5px] border-ink bg-navy px-2 py-[3px] text-[15px] leading-none font-medium text-cream-light transition-colors hover:bg-navy-dark lg:block"
+          className="ml-[5px] hidden rounded-[5px] border-[1.5px] border-ink bg-navy px-2 py-[3px] text-[15px] leading-none font-medium text-cream-light transition-colors hover:bg-navy-dark lg:block"
         >
           A. Smith
         </a>

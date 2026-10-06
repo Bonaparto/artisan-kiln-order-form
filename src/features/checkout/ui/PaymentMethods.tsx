@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useId, type ReactNode } from 'react';
-import { ApplePayIcon, BankIcon, CardIcon, PayPalIcon } from '@/shared/icons';
+import { ApplePayButtonIcon, ApplePayIcon, BankIcon, CardIcon, PayPalIcon } from '@/shared/icons';
 import { cn } from '@/shared/lib/cn';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { paymentMethodChanged } from '../model/checkoutSlice';
@@ -112,24 +112,24 @@ export function PaymentMethodsDesktop({ className }: { className?: string }) {
           Credit/Debit card
         </RadioOption>
         <RadioOption name={name} value="paypal" checked={method === 'paypal'} onSelect={select}>
-          <PayPalIcon className="h-[21px] w-[19px]" />
+          <PayPalIcon className="h-[21px] w-[18px]" />
           PayPal
         </RadioOption>
       </div>
       <MethodDetails method={method} className="mt-2" />
       <div className="mt-2.5 grid grid-cols-2 gap-2.5">
-        {cardOption('apple-pay', 'Apple Pay', <ApplePayIcon className="h-[32px] w-[66px]" />)}
-        {cardOption('bank-transfer', 'Bank transfer', <BankIcon className="h-[31px] w-[37px]" />)}
+        {cardOption('apple-pay', 'Apple Pay', <ApplePayIcon className="h-[27px] w-[63.5px]" />)}
+        {cardOption('bank-transfer', 'Bank transfer', <BankIcon className="h-[32.5px] w-[37px]" />)}
       </div>
     </fieldset>
   );
 }
 
 const MOBILE_ICONS: Record<PaymentMethod, ReactNode> = {
-  card: <CardIcon className="u-h-24 u-w-36" />,
-  paypal: <PayPalIcon className="u-h-27 u-w-23" />,
-  'apple-pay': <ApplePayIcon framed className="u-h-23 u-w-46" />,
-  'bank-transfer': <BankIcon className="u-h-27 u-w-31" />,
+  card: <CardIcon className="u-h-24.5 u-w-36.5" />,
+  paypal: <PayPalIcon className="u-h-28 u-w-23.5" />,
+  'apple-pay': <ApplePayButtonIcon className="u-h-28 u-w-46.5" />,
+  'bank-transfer': <BankIcon className="u-h-28 u-w-31.5" />,
 };
 
 const MOBILE_LABELS: Record<PaymentMethod, ReactNode> = {

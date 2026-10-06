@@ -19,7 +19,7 @@ function TileTrio({ tiles }: { tiles: ArtId[] }) {
 export function SiteHeader() {
   return (
     <div className="relative flex items-center justify-center gap-[25px] u-pt-4 lg:pt-[12px]">
-      <KilnBuilding className="hidden h-[74px] w-[55px] shrink-0 self-end lg:block" />
+      <KilnBuilding className="mb-[3.5px] hidden h-[70.75px] w-[53.75px] shrink-0 self-end lg:block" />
       <div className="flex flex-col items-center">
         <h1 className="text-center u-text-33 leading-none font-bold tracking-[0.004em] uppercase lg:text-[45px] lg:leading-[0.95]">
           Ceramic tile order form
@@ -32,7 +32,7 @@ export function SiteHeader() {
           <TileTrio tiles={RIGHT_TILES} />
         </div>
       </div>
-      <KilnOven className="hidden h-[70px] w-[60px] shrink-0 self-end lg:block" />
+      <KilnOven className="mb-[4px] hidden h-[67px] w-[61.25px] shrink-0 translate-x-[7px] self-end lg:block" />
     </div>
   );
 }

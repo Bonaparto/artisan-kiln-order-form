@@ -11,7 +11,7 @@ import { PlaceOrderButton } from '@/features/checkout/ui/PlaceOrderButton';
 import { BoardSource } from '@/features/design-tool/ui/BoardSource';
 import { DesignBoardProvider } from '@/features/design-tool/ui/DesignBoardProvider';
 import { DesignTool } from '@/features/design-tool/ui/DesignTool';
-import { HandWithTile } from '@/shared/illustrations/hands';
+import { HandWithTile } from '@/shared/illustrations';
 import { cn } from '@/shared/lib/cn';
 
 /** On desktop the tiles of the order can be dragged from the cart onto the design board. */
@@ -41,7 +41,7 @@ export function DesktopOrderView({ className }: { className?: string }) {
             Shopping cart &amp; design tool
           </h2>
           <CartPanel
-            illustration={<HandWithTile className="h-[54px] w-[85px] shrink-0" />}
+            illustration={<HandWithTile className="mr-[5px] h-[57.75px] w-[79px] shrink-0" />}
             renderSwatch={boardSwatch}
           />
         </section>

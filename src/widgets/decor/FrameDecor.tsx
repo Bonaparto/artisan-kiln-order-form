@@ -2,15 +2,17 @@ import {
   ArchTile,
   FernFrond,
   FloralTile,
+  HandsHoldingTile,
+  HandWithPalette,
   NotchTile,
   Pot,
   QuarterTile,
   Shrub,
   Sprig,
+  TileSprig,
   TriangleTile,
   UTile,
 } from '@/shared/illustrations';
-import { HandWithPalette, HandsHoldingTile } from '@/shared/illustrations/hands';
 import { cn } from '@/shared/lib/cn';
 
 /** Leaves, berries and tile shards running down one side of the desktop frame. */
@@ -58,9 +60,9 @@ function BottomBand() {
         <Shrub className="w-[46px] -scale-x-100" />
         <FernFrond pairs={9} className="w-[36px] -rotate-6" />
       </div>
-      <HandsHoldingTile className="absolute bottom-0 left-[27.5%] w-[104px]" />
-      <FernFrond pairs={8} className="absolute bottom-[54px] left-[35.6%] w-[34px] rotate-[20deg]" />
-      <HandWithPalette className="absolute right-[26.5%] bottom-0 w-[112px]" />
+      <HandsHoldingTile className="absolute bottom-0 left-[27.3%] w-[102px]" />
+      <TileSprig className="absolute bottom-[68px] left-[32.3%] w-[35px]" />
+      <HandWithPalette className="absolute right-[26.45%] bottom-0 w-[113px]" />
       <div className="absolute right-[clamp(30px,5.4%,76px)] bottom-0 flex items-end gap-[6px]">
         <FernFrond pairs={9} className="w-[36px] rotate-6" />
         <Shrub className="w-[50px]" />
@@ -111,6 +113,9 @@ function MobileDecor() {
         <FernFrond pairs={8} className="u-w-22 shrink-0 -rotate-12" />
         <Shrub className="u-w-26 shrink-0" />
       </div>
+      {/* The mockup ends on these; here they follow the order button, in the corner. */}
+      <TileSprig className="absolute u-right-n-3.75 u-bottom-58 u-w-30.75" />
+      <HandsHoldingTile className="absolute u-right-n-2 u-bottom-n-2 u-w-89.75" />
     </div>
   );
 }

@@ -57,13 +57,14 @@ module.exports = {
           dark: '#a67b2f',
           light: '#e0bb6c',
         },
-        // Payment network marks keep their recognisable colours.
+        // Payment network marks, in the muted tones the mockups print them in.
         brand: {
           'mc-red': '#e0322b',
           'mc-orange': '#f29a2e',
           'mc-overlap': '#f0662a',
-          'paypal-navy': '#253b80',
-          'paypal-blue': '#2a8fd6',
+          'paypal-navy': '#3e496c',
+          'paypal-blue': '#5b8c8e',
+          'paypal-dark': '#2a2f46',
         },
       },
       fontFamily: {

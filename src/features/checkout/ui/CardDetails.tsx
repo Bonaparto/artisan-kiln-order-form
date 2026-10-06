@@ -1,7 +1,7 @@
 'use client';
 
 import { useId } from 'react';
-import { MastercardIcon } from '@/shared/icons';
+import { MastercardBadge, VisaBadge } from '@/shared/icons';
 import { cn } from '@/shared/lib/cn';
 import { digitsOnly } from '@/shared/lib/digits';
 import { FieldError } from '@/shared/ui/FieldError';
@@ -21,7 +21,7 @@ const badgeState = (brand: CardBrand, badge: CardBrand): BadgeState =>
 
 const badgeClass = (state: BadgeState) =>
   cn(
-    'flex u-h-21 u-w-37 items-center justify-center rounded-[3px] border-[1.5px] border-ink bg-cream-light transition-all duration-200 lg:h-[23px] lg:w-[40px]',
+    'u-h-21 u-w-34.5 rounded-[4px] transition-all duration-200 lg:h-[26.25px] lg:w-[43px]',
     state === 'active' && 'ring-2 ring-navy ring-offset-1 ring-offset-sand',
     state === 'dim' && 'opacity-35 grayscale',
   );
@@ -49,11 +49,9 @@ export function CardDetails({ className }: { className?: string }) {
           className="u-size-13 rounded-full border-[1.5px] border-ink bg-ink inset-ring-[2.5px] inset-ring-cream-light lg:size-[15px]"
         />
         <span className="sr-only">We accept Visa and Mastercard.</span>
-        <span aria-hidden className={badgeClass(badgeState(brand, 'visa'))}>
-          <span className="u-text-12.5 font-extrabold tracking-tight text-navy-dark italic lg:text-[14px]">VISA</span>
-        </span>
-        <span aria-hidden className={badgeClass(badgeState(brand, 'mastercard'))}>
-          <MastercardIcon className="u-h-15 lg:h-[17px]" />
+        <span className="flex u-gap-2 lg:gap-[2px]">
+          <VisaBadge className={badgeClass(badgeState(brand, 'visa'))} />
+          <MastercardBadge className={badgeClass(badgeState(brand, 'mastercard'))} />
         </span>
       </div>
 

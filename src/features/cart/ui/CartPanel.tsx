@@ -23,7 +23,7 @@ export function CartPanel({ className, illustration, renderSwatch }: CartPanelPr
     <div className={className}>
       <CartTable focusTileId={justAdded} onEmptied={() => addButtonRef.current?.focus()} renderSwatch={renderSwatch} />
       <div className="flex items-start justify-between">
-        <div className="flex items-start u-pt-6 u-pl-7.5 lg:pt-[6px] lg:pl-[9px]">
+        <div className="flex items-start u-pt-6 u-pl-4 lg:pt-[6px] lg:pl-[9px]">
           {illustration}
           <AddTileButton ref={addButtonRef} onAdded={setJustAdded} />
         </div>

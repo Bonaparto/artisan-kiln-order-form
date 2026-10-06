@@ -59,16 +59,19 @@ export function CartRow({ line, autoFocus, onRemove, renderSwatch }: CartRowProp
         </Bracketed>
       </td>
       <td className={cell}>
-        <span className="flex items-start justify-center u-gap-1 lg:gap-[2px]">
+        <span className="flex items-start justify-center u-gap-2 lg:gap-[2.75px]">
           <motion.button
             type="button"
             whileTap={{ scale: 0.88 }}
             onClick={() => dispatch(quantityIncremented(tile.id))}
             aria-label={`Add ${QUANTITY_STEP} sq. ft. of ${tile.name}`}
-            className="group flex flex-col items-center u-gap-1.5 rounded-[3px] lg:gap-[3px]"
+            className="group flex flex-col items-center u-gap-2.5 rounded-[3px] lg:gap-[2px]"
           >
-            <AddIcon className="u-h-14 u-w-19 transition-transform group-hover:-translate-y-px lg:h-[22px] lg:w-[30px]" />
-            <span aria-hidden className="u-text-8.5 leading-none font-medium uppercase lg:text-[10.5px]">
+            <AddIcon className="u-h-17.75 u-w-23.75 transition-transform group-hover:-translate-y-px lg:h-[20.5px] lg:w-[27.25px]" />
+            <span
+              aria-hidden
+              className="u-pr-6.5 u-text-8 leading-none font-semibold uppercase lg:pr-[7px] lg:text-[11.5px]"
+            >
               Add
             </span>
           </motion.button>
@@ -78,10 +81,10 @@ export function CartRow({ line, autoFocus, onRemove, renderSwatch }: CartRowProp
             onClick={() => onRemove(line)}
             data-remove-button={tile.id}
             aria-label={`Remove ${tile.name} from cart`}
-            className="group flex flex-col items-center u-gap-1.5 rounded-[3px] lg:gap-[3px]"
+            className="group flex flex-col items-center u-gap-2.5 rounded-[3px] lg:gap-[2px]"
           >
-            <TrashIcon className="u-h-17 u-w-15.5 transition-transform group-hover:-translate-y-px group-hover:-rotate-6 lg:h-[24px] lg:w-[22px]" />
-            <span aria-hidden className="u-text-8.5 leading-none font-medium uppercase lg:text-[10.5px]">
+            <TrashIcon className="u-h-19 u-w-18 transition-transform group-hover:-translate-y-px group-hover:-rotate-6 lg:h-[22.25px] lg:w-[21px]" />
+            <span aria-hidden className="u-text-8 leading-none font-semibold uppercase lg:text-[11.5px]">
               Remove
             </span>
           </motion.button>

@@ -6,8 +6,7 @@ import { CheckoutForm } from '@/features/checkout/ui/CheckoutForm';
 import { CustomerFields, NotesField } from '@/features/checkout/ui/CustomerFields';
 import { PaymentDetailsMobile, PaymentMethodsMobile } from '@/features/checkout/ui/PaymentMethods';
 import { PlaceOrderButton } from '@/features/checkout/ui/PlaceOrderButton';
-import { QuarterTile, Sprig, TriangleTile } from '@/shared/illustrations';
-import { HandWithTile, HandsHoldingTile } from '@/shared/illustrations/hands';
+import { HandWithTile, QuarterTile, TriangleTile } from '@/shared/illustrations';
 import { cn } from '@/shared/lib/cn';
 
 /**
@@ -34,23 +33,22 @@ export function MobileOrderView({ className }: { className?: string }) {
         <h2 id={cartTitleId} className="sr-only">
           Shopping cart
         </h2>
-        <CartPanel illustration={<HandWithTile className="u-h-46 u-w-67.5 shrink-0" />} />
+        <CartPanel illustration={<HandWithTile className="u-mr-4 u-h-52 u-w-71 shrink-0" />} />
       </section>
 
       <PaymentMethodsMobile className="u-mt-6.5" />
 
       <div className="relative">
-        <NotesField label="Project name / notes:" rows={2} className="u-mr-61 u-pl-5 u-text-14" />
+        <NotesField label="Project name / notes:" rows={2} className="u-mr-1.5 u-pl-5 u-text-14" />
         <div aria-hidden className="pointer-events-none">
           <TriangleTile className="absolute u-top-6 u-left-n-21 u-w-17" />
           <QuarterTile tone="terracotta" className="absolute u-top-28 u-left-n-21 u-w-17" />
-          <Sprig pairs={4} className="absolute u-top-n-34 u-right-n-26 u-w-26 rotate-[16deg]" />
-          <HandsHoldingTile className="absolute u-top-n-4 u-right-n-24 u-w-92" />
         </div>
       </div>
 
       <PaymentDetailsMobile className="u-mt-28" />
-      <PlaceOrderButton className="u-mt-12" />
+      {/* Room under the button for the hands in the bottom corner. */}
+      <PlaceOrderButton className="u-mt-12 u-mb-16" />
     </CheckoutForm>
   );
 }
