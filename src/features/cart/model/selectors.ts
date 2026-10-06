@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { TILE_IDS, getTile, type Tile } from '@/entities/tile';
 import { cartAdapter, type CartItem, type CartState } from './cartSlice';
-import { amountUntilFreeShipping, calculateLineTotal, calculateTotals } from './pricing';
+import { calculateLineTotal, calculateTotals } from './pricing';
 
 /** Selectors only need the slice they read, which keeps features decoupled from the root store type. */
 interface WithCart {
@@ -23,10 +23,7 @@ export const selectCartLines = createSelector([selectCartItems], (items): CartLi
   items.map((item) => ({ ...item, tile: getTile(item.tileId), lineTotal: calculateLineTotal(item) })),
 );
 
-export const selectCartTotals = createSelector([selectCartItems], (items) => {
-  const totals = calculateTotals(items);
-  return { ...totals, untilFreeShipping: totals.subtotal > 0 ? amountUntilFreeShipping(totals.subtotal) : 0 };
-});
+export const selectCartTotals = createSelector([selectCartItems], calculateTotals);
 
 /** Catalog tiles that are not in the cart yet — the options of "Add new tile to cart". */
 export const selectTilesNotInCart = createSelector([adapterSelectors.selectEntities], (entities): Tile[] =>

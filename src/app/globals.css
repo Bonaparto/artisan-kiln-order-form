@@ -35,6 +35,117 @@
   }
 }
 
+/*
+ * Mobile sizes are written in "u": one pixel of the mobile mockup (a 384px
+ * phone screen), scaled with the page frame — see PageFrame, which sets --u.
+ * So the mobile layout keeps the mockup's proportions on any phone, and is the
+ * mockup at 1:1 on a 768px screen. Desktop classes (lg:) use plain px.
+ */
+@utility u-text-* {
+  font-size: calc(var(--u) * --value(number));
+}
+@utility u-leading-* {
+  line-height: calc(var(--u) * --value(number));
+}
+@utility u-h-* {
+  height: calc(var(--u) * --value(number));
+}
+@utility u-min-h-* {
+  min-height: calc(var(--u) * --value(number));
+}
+@utility u-w-* {
+  width: calc(var(--u) * --value(number));
+}
+@utility u-min-w-* {
+  min-width: calc(var(--u) * --value(number));
+}
+@utility u-size-* {
+  width: calc(var(--u) * --value(number));
+  height: calc(var(--u) * --value(number));
+}
+@utility u-p-* {
+  padding: calc(var(--u) * --value(number));
+}
+@utility u-px-* {
+  padding-inline: calc(var(--u) * --value(number));
+}
+@utility u-py-* {
+  padding-block: calc(var(--u) * --value(number));
+}
+@utility u-pt-* {
+  padding-top: calc(var(--u) * --value(number));
+}
+@utility u-pb-* {
+  padding-bottom: calc(var(--u) * --value(number));
+}
+@utility u-pl-* {
+  padding-left: calc(var(--u) * --value(number));
+}
+@utility u-pr-* {
+  padding-right: calc(var(--u) * --value(number));
+}
+@utility u-mt-* {
+  margin-top: calc(var(--u) * --value(number));
+}
+@utility u-mb-* {
+  margin-bottom: calc(var(--u) * --value(number));
+}
+@utility u-ml-* {
+  margin-left: calc(var(--u) * --value(number));
+}
+@utility u-mr-* {
+  margin-right: calc(var(--u) * --value(number));
+}
+@utility u-gap-* {
+  gap: calc(var(--u) * --value(number));
+}
+@utility u-gap-x-* {
+  column-gap: calc(var(--u) * --value(number));
+}
+@utility u-gap-y-* {
+  row-gap: calc(var(--u) * --value(number));
+}
+@utility u-top-* {
+  top: calc(var(--u) * --value(number));
+}
+@utility u-bottom-* {
+  bottom: calc(var(--u) * --value(number));
+}
+@utility u-left-* {
+  left: calc(var(--u) * --value(number));
+}
+@utility u-right-* {
+  right: calc(var(--u) * --value(number));
+}
+@utility u-rounded-* {
+  border-radius: calc(var(--u) * --value(number));
+}
+/* Negative offsets: u-top-n-4 → top: -4u. */
+@utility u-top-n-* {
+  top: calc(var(--u) * --value(number) * -1);
+}
+@utility u-bottom-n-* {
+  bottom: calc(var(--u) * --value(number) * -1);
+}
+@utility u-left-n-* {
+  left: calc(var(--u) * --value(number) * -1);
+}
+@utility u-right-n-* {
+  right: calc(var(--u) * --value(number) * -1);
+}
+@utility u-mt-n-* {
+  margin-top: calc(var(--u) * --value(number) * -1);
+}
+@utility u-mb-n-* {
+  margin-bottom: calc(var(--u) * --value(number) * -1);
+}
+@utility u-ml-n-* {
+  margin-left: calc(var(--u) * --value(number) * -1);
+}
+@utility u-mr-n-* {
+  margin-right: calc(var(--u) * --value(number) * -1);
+}
+
 /* Fine paper grain, so flat cream reads like the printed mockup. */
 @utility paper {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .36 0 0 0 0 .25 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -43,7 +154,7 @@
 @layer components {
   /* Ruled "fill in the blank" input. */
   .lined-input {
-    @apply min-w-0 flex-1 rounded-none border-b-[1.5px] border-ink bg-transparent px-1 py-0 leading-tight text-ink transition-colors outline-none;
+    @apply min-w-0 flex-1 rounded-none border-b-[1.5px] border-ink bg-transparent px-1 py-0 leading-none text-ink transition-colors outline-none;
     /* One ruled line per row; the pitch is set by the surrounding layout. */
     height: var(--field-pitch, auto);
   }

@@ -30,10 +30,10 @@ function ToolButton({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        'grid size-[30px] place-items-center rounded-[6px] border-[1.5px] border-transparent transition-colors disabled:opacity-35',
+        'grid size-[30px] place-items-center rounded-[6px] border-[1.5px] border-ink/60 transition-colors disabled:opacity-35',
         pressed
           ? 'border-ink bg-navy text-cream-light'
-          : 'hover:border-ink/70 hover:bg-cream/60 enabled:active:translate-y-px',
+          : 'bg-cream/60 hover:border-ink hover:bg-cream enabled:active:translate-y-px',
       )}
     >
       {children}
@@ -41,32 +41,16 @@ function ToolButton({
   );
 }
 
-/** Status line + eraser / fill / clear under the board. */
-export function DesignToolbar() {
+/** Eraser / fill / clear, tucked under the palette tiles. */
+export function DesignToolbar({ className }: { className?: string }) {
   const dispatch = useAppDispatch();
   const tool = useAppSelector(selectTool);
   const filled = useAppSelector(selectFilledCount);
 
-  const status =
-    tool?.kind === 'tile' ? (
-      <>
-        Brush: <strong className="font-semibold uppercase">{getTile(tool.tileId).name}</strong> — click cells to lay it
-      </>
-    ) : tool?.kind === 'eraser' ? (
-      <>Eraser on — click tiles to lift them</>
-    ) : (
-      <>
-        {filled}/{CELL_COUNT} laid · pick a tile or drag it in
-      </>
-    );
-
   return (
-    <div className="flex h-[38px] items-center gap-2 border-t-2 border-ink pr-1.5 pl-3">
-      <p aria-live="polite" className="min-w-0 flex-1 truncate text-[14px] text-ink-soft">
-        {status}
-      </p>
+    <div role="toolbar" aria-label="Board tools" className={cn('flex justify-center gap-1.5', className)}>
       <ToolButton label="Eraser" pressed={tool?.kind === 'eraser'} onClick={() => dispatch(eraserToggled())}>
-        <EraserIcon className="size-[18px]" />
+        <EraserIcon className="size-[17px]" />
       </ToolButton>
       <ToolButton
         label={
@@ -77,11 +61,28 @@ export function DesignToolbar() {
         disabled={tool?.kind !== 'tile' || filled === CELL_COUNT}
         onClick={() => tool?.kind === 'tile' && dispatch(emptyCellsFilled(tool.tileId))}
       >
-        <FillIcon className="size-[18px]" />
+        <FillIcon className="size-[17px]" />
       </ToolButton>
       <ToolButton label="Clear the board" disabled={filled === 0} onClick={() => dispatch(gridCleared())}>
-        <SweepIcon className="size-[18px]" />
+        <SweepIcon className="size-[17px]" />
       </ToolButton>
     </div>
+  );
+}
+
+/** What the board is doing right now, for screen readers. */
+export function BoardStatus() {
+  const tool = useAppSelector(selectTool);
+  const filled = useAppSelector(selectFilledCount);
+  const status =
+    tool?.kind === 'tile'
+      ? `Brush: ${getTile(tool.tileId).name}. Click cells to lay it.`
+      : tool?.kind === 'eraser'
+        ? 'Eraser on. Click tiles to lift them.'
+        : `${filled} of ${CELL_COUNT} cells laid.`;
+  return (
+    <p aria-live="polite" className="sr-only">
+      {status}
+    </p>
   );
 }

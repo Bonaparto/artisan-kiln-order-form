@@ -22,14 +22,17 @@ const D: TileId = 'terracotta-dot';
 const Y: TileId = 'yellow-star';
 const S: TileId = 'sun-arc';
 const I: TileId = 'indigo-arc';
+const O: TileId = 'saffron-compass';
 const C: TileId = 'clay-compass';
+const U: TileId = 'indigo-curve';
+const X: TileId = 'snowflake';
 const A: TileId = 'alhambra';
 
-/** The half-finished board from the desktop mockup. */
+/** The half-finished board from the desktop mockup, tile for tile. */
 // prettier-ignore
 export const SAMPLE_PATTERN: readonly Cell[] = [
-  S, I, C, C, _, _, _,
-  I, D, Y, I, _, _, _,
+  S, I, O, C, _, _, _,
+  U, D, X, U, _, _, _,
   D, F, A, F, _, _, _,
   D, D, F, W, _, _, _,
   C, D, W, Y, _, _, _,

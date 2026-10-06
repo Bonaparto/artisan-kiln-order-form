@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { TILE_IDS } from '@/entities/tile';
 import { dollars } from '@/shared/lib/money';
 import { orderFinished } from '@/store/actions';
 import { makeStore } from '@/store/store';
@@ -147,7 +148,6 @@ describe('selectors', () => {
       subtotal: dollars(13_100),
       shipping: 0,
       grandTotal: dollars(13_100),
-      untilFreeShipping: 0,
     });
     store.dispatch(quantityChanged({ tileId: 'ocean-wave', quantity: 1 }));
     store.dispatch(itemRemoved('terracotta-dot'));
@@ -174,7 +174,7 @@ describe('selectors', () => {
     const offered = selectTilesNotInCart(store.getState()).map((tile) => tile.id);
     expect(offered).not.toContain('ocean-wave');
     expect(offered).toContain('azure-star');
-    expect(offered).toHaveLength(8);
+    expect(offered).toHaveLength(TILE_IDS.length - 4);
   });
 
   it('report what blocks checkout', () => {

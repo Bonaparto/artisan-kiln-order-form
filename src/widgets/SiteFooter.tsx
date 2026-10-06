@@ -2,10 +2,10 @@ const LINKS = ['Terms of service', 'Privacy policy', 'Shipping info', 'Contact u
 
 export function SiteFooter() {
   return (
-    <footer className="relative z-10 pt-6 pb-12 text-center text-[15px] font-semibold uppercase sm:pb-14 lg:pt-4 lg:pb-[10px] lg:text-[14.5px]">
+    <footer className="relative z-10 u-pt-12 u-pb-2 text-center u-text-10.5 font-semibold uppercase lg:pt-4 lg:pb-[10px] lg:text-[14.5px]">
       {/* Mobile mockup: just two links. */}
       <nav aria-label="Footer" className="lg:hidden">
-        <ul className="flex justify-center gap-6">
+        <ul className="flex justify-center u-gap-10">
           <li>
             <a href="#" className="hover:underline">
               Terms

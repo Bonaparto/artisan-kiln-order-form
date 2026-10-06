@@ -33,7 +33,7 @@ export function LinedInput({ label, error, className, id, ref, ...inputProps }: 
   const errorId = `${inputId}-error`;
   return (
     <div className={cn('min-w-0', className)}>
-      <div className="flex items-baseline gap-1.5">
+      <div className="flex items-baseline u-gap-5 lg:gap-[5px]">
         <label htmlFor={inputId} className={labelClass}>
           {label}
         </label>

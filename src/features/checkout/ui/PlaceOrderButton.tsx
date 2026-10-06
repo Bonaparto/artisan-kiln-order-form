@@ -46,7 +46,7 @@ export function PlaceOrderButton({ className }: { className?: string }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden text-center text-[14.5px] leading-snug font-medium text-terracotta-dark"
+            className="overflow-hidden text-center u-text-13 leading-snug font-medium text-terracotta-dark lg:text-[14.5px]"
           >
             <span className="block pb-1.5">{message}</span>
           </motion.p>
@@ -57,7 +57,7 @@ export function PlaceOrderButton({ className }: { className?: string }) {
         type="submit"
         aria-disabled={submitting || undefined}
         className={cn(
-          'flex h-[38px] w-full items-center justify-center gap-2 rounded-[6px] border-2 border-ink bg-navy text-[21px] font-semibold tracking-[0.01em] text-cream-light uppercase shadow-ink-sm transition-colors hover:bg-navy-dark active:translate-y-px active:shadow-none',
+          'flex u-h-36 w-full items-center justify-center gap-2 u-rounded-6 border-2 border-ink bg-navy u-text-19 font-semibold tracking-[0.01em] text-cream-light uppercase shadow-ink-sm transition-colors hover:bg-navy-dark active:translate-y-px active:shadow-none lg:h-[38px] lg:rounded-[6px] lg:text-[21px]',
           submitting && 'cursor-progress opacity-90',
         )}
       >

@@ -3,7 +3,6 @@ import { dollars } from '@/shared/lib/money';
 import {
   FREE_SHIPPING_THRESHOLD,
   SHIPPING_FEE,
-  amountUntilFreeShipping,
   calculateLineTotal,
   calculateShipping,
   calculateSubtotal,
@@ -100,16 +99,5 @@ describe('calculateTotals', () => {
       const { subtotal, shipping, grandTotal } = calculateTotals([{ quantity, unitPrice: dollars(28) }]);
       expect(grandTotal).toBe(subtotal + shipping);
     }
-  });
-});
-
-describe('amountUntilFreeShipping', () => {
-  it('is the gap to the first cent over $500', () => {
-    expect(amountUntilFreeShipping(dollars(393))).toBe(dollars(107.01));
-    expect(amountUntilFreeShipping(dollars(500))).toBe(1);
-  });
-
-  it('is zero once shipping is free', () => {
-    expect(amountUntilFreeShipping(dollars(500.01))).toBe(0);
   });
 });

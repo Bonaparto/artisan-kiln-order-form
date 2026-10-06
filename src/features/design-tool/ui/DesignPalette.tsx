@@ -3,18 +3,19 @@
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { motion } from 'framer-motion';
 import { useId } from 'react';
-import { TILE_IDS, TileArt, getTile, type TileId } from '@/entities/tile';
+import { PALETTE_TILE_IDS, TileArt, getTile, type TileId } from '@/entities/tile';
 import { cn } from '@/shared/lib/cn';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { tileToolToggled } from '../model/designSlice';
-import { selectTileUsage, selectTool } from '../model/selectors';
-import type { DragData, DropData } from './dnd';
+import { selectTool } from '../model/selectors';
+import { useDragging, type DragData, type DropData } from './dnd';
+import { DesignToolbar } from './DesignToolbar';
 
-/** Every catalog tile: click to pick it as the brush, or drag it onto the board. */
-export function DesignPalette({ dragging }: { dragging: DragData | null }) {
+/** The ten decorative tiles of the mockup: click to pick one as the brush, or drag it onto the board. */
+export function DesignPalette() {
   const titleId = useId();
   const tool = useAppSelector(selectTool);
-  const usage = useAppSelector(selectTileUsage);
+  const dragging = useDragging();
   // Dropping a board tile back here takes it off the board.
   const { setNodeRef, isOver } = useDroppable({ id: 'palette', data: { target: 'palette' } satisfies DropData });
   const returning = dragging?.source === 'board';
@@ -23,25 +24,25 @@ export function DesignPalette({ dragging }: { dragging: DragData | null }) {
     <div ref={setNodeRef} className="relative flex w-[132px] shrink-0 flex-col border-l-2 border-ink">
       <h3
         id={titleId}
-        className="border-b-2 border-ink py-1.5 text-center text-[20px] leading-tight font-semibold uppercase"
+        className="flex h-[39px] shrink-0 items-center justify-center border-b-[1.5px] border-ink text-[21px] leading-none font-semibold uppercase"
       >
         Design palette
       </h3>
-      <ul aria-labelledby={titleId} className="grid grid-cols-2 content-start gap-x-2 gap-y-2.5 px-[10px] py-3">
-        {TILE_IDS.map((tileId) => (
+      <ul
+        aria-labelledby={titleId}
+        className="grid grid-cols-2 content-start gap-x-[8px] gap-y-[12px] pt-[12px] pr-[10px] pl-[8px]"
+      >
+        {PALETTE_TILE_IDS.map((tileId) => (
           <li key={tileId}>
-            <PaletteTile
-              tileId={tileId}
-              selected={tool?.kind === 'tile' && tool.tileId === tileId}
-              onBoard={usage[tileId] ?? 0}
-            />
+            <PaletteTile tileId={tileId} selected={tool?.kind === 'tile' && tool.tileId === tileId} />
           </li>
         ))}
       </ul>
+      <DesignToolbar className="mt-auto pb-[14px]" />
       {returning && (
         <div
           className={cn(
-            'absolute inset-1.5 top-[44px] flex items-center justify-center rounded-[6px] border-2 border-dashed border-ink/60 bg-cream/85 p-3 text-center text-[15px] font-semibold text-ink-soft uppercase transition-colors',
+            'absolute inset-1.5 top-[45px] flex items-center justify-center rounded-[6px] border-2 border-dashed border-ink/60 bg-cream/85 p-3 text-center text-[15px] font-semibold text-ink-soft uppercase transition-colors',
             isOver && 'border-terracotta bg-terracotta/15 text-terracotta-dark',
           )}
         >
@@ -52,7 +53,7 @@ export function DesignPalette({ dragging }: { dragging: DragData | null }) {
   );
 }
 
-function PaletteTile({ tileId, selected, onBoard }: { tileId: TileId; selected: boolean; onBoard: number }) {
+function PaletteTile({ tileId, selected }: { tileId: TileId; selected: boolean }) {
   const dispatch = useAppDispatch();
   const { name } = getTile(tileId);
   const { setNodeRef, listeners, isDragging } = useDraggable({
@@ -66,7 +67,7 @@ function PaletteTile({ tileId, selected, onBoard }: { tileId: TileId; selected: 
       type="button"
       title={name}
       aria-pressed={selected}
-      aria-label={`${name}${onBoard ? `, ${onBoard} on the board` : ''}`}
+      aria-label={name}
       onClick={() => dispatch(tileToolToggled(tileId))}
       whileHover={{ y: -2, rotate: -2 }}
       whileTap={{ scale: 0.94 }}
@@ -80,14 +81,6 @@ function PaletteTile({ tileId, selected, onBoard }: { tileId: TileId; selected: 
       <span className="block size-full overflow-hidden rounded-[6px] border-2 border-ink shadow-tile">
         <TileArt tileId={tileId} className="block size-full" />
       </span>
-      {onBoard > 0 && (
-        <span
-          aria-hidden
-          className="absolute -right-1.5 -bottom-1.5 min-w-[18px] rounded-full border-[1.5px] border-ink bg-cream-light px-1 text-[11px] leading-[15px] font-bold tabular-nums"
-        >
-          {onBoard}
-        </span>
-      )}
     </motion.button>
   );
 }

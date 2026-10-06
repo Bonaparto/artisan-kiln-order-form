@@ -35,7 +35,3 @@ export const calculateTotals = (lines: readonly PricedLine[]): OrderTotals => {
   const shipping = calculateShipping(subtotal);
   return { subtotal, shipping, grandTotal: subtotal + shipping };
 };
-
-/** How much more the customer has to add to unlock free shipping (0 when it already applies). */
-export const amountUntilFreeShipping = (subtotal: Cents): Cents =>
-  subtotal > FREE_SHIPPING_THRESHOLD ? 0 : FREE_SHIPPING_THRESHOLD + 1 - subtotal;

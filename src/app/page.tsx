@@ -15,17 +15,20 @@ import { MobileDecor } from '@/widgets/decor/FrameDecor';
  */
 export default function OrderPage() {
   return (
-    <PageFrame>
-      <TopBar />
-      <main>
-        <SiteHeader />
-        <MobileOrderView className="lg:hidden" />
-        <DesktopOrderView className="hidden lg:grid" />
-      </main>
-      <SiteFooter />
-      <MobileDecor />
-      <OrderConfirmationDialog />
+    <>
+      <PageFrame>
+        <TopBar />
+        <main>
+          <SiteHeader />
+          <MobileOrderView className="lg:hidden" />
+          <DesktopOrderView className="hidden lg:grid" />
+        </main>
+        <SiteFooter />
+        <MobileDecor />
+      </PageFrame>
+      {/* Outside the frame: it is a size container, which would trap position: fixed. */}
       <RemovalToast />
-    </PageFrame>
+      <OrderConfirmationDialog />
+    </>
   );
 }

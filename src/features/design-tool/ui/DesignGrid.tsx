@@ -8,7 +8,7 @@ import { cn } from '@/shared/lib/cn';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { CELL_COUNT, GRID_SIZE, cellCleared, cellPainted, type DesignTool } from '../model/designSlice';
 import { selectCells, selectTool } from '../model/selectors';
-import { cellPosition, type DragData, type DropData } from './dnd';
+import { cellPosition, useDragging, type DragData, type DropData } from './dnd';
 
 const ROWS = Array.from({ length: GRID_SIZE }, (_, row) => row);
 
@@ -17,8 +17,9 @@ const ROWS = Array.from({ length: GRID_SIZE }, (_, row) => row);
  * arrow keys / Home / End move between cells, Enter or Space applies the
  * active tool, Delete or Backspace clears a cell.
  */
-export function DesignGrid({ dragging }: { dragging: DragData | null }) {
+export function DesignGrid() {
   const dispatch = useAppDispatch();
+  const dragging = useDragging();
   const cells = useAppSelector(selectCells);
   const tool = useAppSelector(selectTool);
   const [focusIndex, setFocusIndex] = useState(0);
@@ -64,7 +65,6 @@ export function DesignGrid({ dragging }: { dragging: DragData | null }) {
                 tool={tool}
                 dragging={dragging}
                 tabbable={index === focusIndex}
-                lastColumn={column === GRID_SIZE - 1}
                 lastRow={row === GRID_SIZE - 1}
                 buttonRef={(node) => {
                   cellRefs.current[index] = node;
@@ -88,7 +88,6 @@ interface GridCellProps {
   tool: DesignTool | null;
   dragging: DragData | null;
   tabbable: boolean;
-  lastColumn: boolean;
   lastRow: boolean;
   buttonRef: (node: HTMLButtonElement | null) => void;
   onFocus: () => void;
@@ -103,7 +102,6 @@ function GridCell({
   tool,
   dragging,
   tabbable,
-  lastColumn,
   lastRow,
   buttonRef,
   onFocus,
@@ -142,11 +140,7 @@ function GridCell({
     <div
       ref={setDropRef}
       role="gridcell"
-      className={cn(
-        'relative aspect-square border-ink',
-        !lastColumn && 'border-r-[1.5px]',
-        !lastRow && 'border-b-[1.5px]',
-      )}
+      className={cn('relative aspect-square border-r-[1.5px] border-ink', !lastRow && 'border-b-[1.5px]')}
     >
       <button
         ref={(node) => {

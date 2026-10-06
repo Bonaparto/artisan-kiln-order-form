@@ -11,9 +11,9 @@ import { PAYMENT_METHODS, PAYMENT_METHOD_LABELS, type PaymentMethod } from '../m
 import { CardDetails } from './CardDetails';
 
 const radioClass =
-  'size-[15px] shrink-0 cursor-pointer appearance-none rounded-full border-[1.5px] border-ink bg-cream-light transition-colors checked:bg-navy checked:inset-ring-[2.5px] checked:inset-ring-cream-light';
+  'shrink-0 cursor-pointer appearance-none rounded-full border-[1.5px] border-ink bg-cream-light transition-colors checked:bg-navy checked:inset-ring-[2.5px] checked:inset-ring-cream-light';
 
-const legendBox = 'inline-block border-[1.5px] border-ink bg-sand px-1.5 py-px font-semibold uppercase leading-tight';
+const legendBox = 'border-[1.5px] border-ink bg-sand font-semibold uppercase leading-tight';
 
 function usePaymentMethod() {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function RadioOption({ name, value, checked, onSelect, className, children }: Op
         value={value}
         checked={checked}
         onChange={() => onSelect(value)}
-        className={radioClass}
+        className={cn(radioClass, 'size-[15px]')}
       />
       {children}
     </label>
@@ -68,7 +68,7 @@ function MethodDetails({ method, className }: { method: PaymentMethod; className
         {method === 'card' ? (
           <CardDetails />
         ) : (
-          <p className="rounded-[8px] border-[1.5px] border-dashed border-ink/60 bg-sand/60 px-3 py-2 text-[15px] leading-snug">
+          <p className="u-rounded-8 border-[1.5px] border-dashed border-ink/60 bg-sand/60 u-px-10 u-py-7 u-text-13.5 leading-snug lg:rounded-[8px] lg:px-3 lg:py-2 lg:text-[15px]">
             <strong className="font-semibold uppercase">{PAYMENT_METHOD_LABELS[method]}:</strong> {NOTES[method]}
           </p>
         )}
@@ -96,7 +96,7 @@ export function PaymentMethodsDesktop({ className }: { className?: string }) {
           value={value}
           checked={method === value}
           onChange={() => select(value)}
-          className={radioClass}
+          className={cn(radioClass, 'size-[15px]')}
         />
         {icon}
       </span>
@@ -106,7 +106,7 @@ export function PaymentMethodsDesktop({ className }: { className?: string }) {
 
   return (
     <fieldset className={cn('min-w-0', className)}>
-      <legend className={cn(legendBox, 'text-[17.5px]')}>Select payment method:</legend>
+      <legend className={cn(legendBox, 'inline-block px-1.5 py-px text-[17.5px]')}>Select payment method:</legend>
       <div className="mt-2 flex items-center gap-x-7 pl-1 text-[17px] font-semibold uppercase">
         <RadioOption name={name} value="card" checked={method === 'card'} onSelect={select}>
           Credit/Debit card
@@ -126,33 +126,47 @@ export function PaymentMethodsDesktop({ className }: { className?: string }) {
 }
 
 const MOBILE_ICONS: Record<PaymentMethod, ReactNode> = {
-  card: <CardIcon className="h-[30px] w-[44px]" />,
-  paypal: <PayPalIcon className="h-[34px] w-[30px]" />,
-  'apple-pay': <ApplePayIcon framed className="h-[28px] w-[56px]" />,
-  'bank-transfer': <BankIcon className="h-[32px] w-[38px]" />,
+  card: <CardIcon className="u-h-24 u-w-36" />,
+  paypal: <PayPalIcon className="u-h-27 u-w-23" />,
+  'apple-pay': <ApplePayIcon framed className="u-h-23 u-w-46" />,
+  'bank-transfer': <BankIcon className="u-h-27 u-w-31" />,
 };
 
-const MOBILE_LABELS: Record<PaymentMethod, string> = {
-  card: 'Credit/Debit card',
+const MOBILE_LABELS: Record<PaymentMethod, ReactNode> = {
+  card: (
+    <>
+      Credit/Debit
+      <br />
+      card
+    </>
+  ),
   paypal: 'PayPal',
   'apple-pay': 'Apple Pay',
-  'bank-transfer': 'Bank transfer',
+  'bank-transfer': (
+    <>
+      Bank
+      <br />
+      transfer
+    </>
+  ),
 };
 
-/** Mobile picker: four tiles in a framed row, then the details panel. */
+/** Mobile picker: four tiles in a framed row, as in the mockup. */
 export function PaymentMethodsMobile({ className }: { className?: string }) {
   const [method, select] = usePaymentMethod();
   const name = useId();
 
   return (
     <fieldset className={cn('min-w-0', className)}>
-      <legend className={cn(legendBox, 'border-b-0 text-[16px] sm:text-[18px]')}>Select payment method:</legend>
-      <div className="grid grid-cols-4 border-2 border-ink">
+      <legend className={cn(legendBox, 'flex u-h-19 items-center border-b-0 u-px-5 u-text-13')}>
+        Select payment method:
+      </legend>
+      <div className="grid u-h-61.5 grid-cols-4 border-2 border-ink">
         {PAYMENT_METHODS.map((value, index) => (
           <label
             key={value}
             className={cn(
-              'relative flex min-h-[86px] cursor-pointer flex-col items-center justify-end gap-1.5 border-ink px-1 pt-3 pb-2 text-center transition-colors sm:min-h-[104px]',
+              'relative flex cursor-pointer flex-col items-center border-ink u-px-2 u-pt-8 u-pb-4 text-center transition-colors',
               index > 0 && 'border-l-[1.5px]',
               method === value ? 'bg-sand' : 'hover:bg-sand/40',
             )}
@@ -163,16 +177,19 @@ export function PaymentMethodsMobile({ className }: { className?: string }) {
               value={value}
               checked={method === value}
               onChange={() => select(value)}
-              className={cn(radioClass, 'absolute top-3 left-1.5 sm:top-4 sm:left-2.5 sm:size-[17px]')}
+              className={cn(radioClass, 'absolute u-top-16 u-left-6 u-size-12.5')}
             />
-            <span className="flex flex-1 items-center pl-3 sm:pl-5">{MOBILE_ICONS[value]}</span>
-            <span className="text-[12px] leading-[1.05] font-semibold uppercase sm:text-[15px]">
-              {MOBILE_LABELS[value]}
-            </span>
+            <span className="flex u-h-28 items-center u-pl-10">{MOBILE_ICONS[value]}</span>
+            <span className="mt-auto u-text-10.5 leading-[1.02] font-semibold uppercase">{MOBILE_LABELS[value]}</span>
           </label>
         ))}
       </div>
-      <MethodDetails method={method} className="mt-3" />
     </fieldset>
   );
+}
+
+/** Mobile: the card fields (or a note for the other methods), placed after the mockup's sections. */
+export function PaymentDetailsMobile({ className }: { className?: string }) {
+  const [method] = usePaymentMethod();
+  return <MethodDetails method={method} className={className} />;
 }

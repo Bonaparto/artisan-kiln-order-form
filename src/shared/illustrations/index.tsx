@@ -19,9 +19,9 @@ const inked = (fill = '', width = 1.5) =>
 
 export function WindowDots({ className }: { className?: string }) {
   return (
-    <span aria-hidden className={`flex items-center gap-[4px] sm:gap-[6px] ${className ?? ''}`}>
+    <span aria-hidden className={`flex items-center u-gap-4 lg:gap-[6px] ${className ?? ''}`}>
       {['bg-terracotta', 'bg-mustard', 'bg-sage'].map((color) => (
-        <span key={color} className={`size-[11px] rounded-full border-[1.5px] border-ink sm:size-[13px] ${color}`} />
+        <span key={color} className={`u-size-10 rounded-full border-[1.5px] border-ink lg:size-[13px] ${color}`} />
       ))}
     </span>
   );
@@ -115,6 +115,74 @@ export function Sprig({ pairs = 6, berries = false, ...props }: SprigProps) {
         </g>
       ))}
       <path d={leafPath(16, 4.6)} transform="translate(22 10) rotate(-90)" {...inked('fill-sage', 0.9)} />
+    </svg>
+  );
+}
+
+/** Fern frond with dense, narrow leaflets — the big fronds in the mockup corners. */
+export function FernFrond({ pairs = 12, ...props }: Props & { pairs?: number }) {
+  const step = 8.5;
+  const height = pairs * step + 18;
+  const leaflets = Array.from({ length: pairs }, (_, i) => {
+    const t = i / pairs;
+    return { y: height - 8 - i * step, size: 27 * (1 - t * 0.62) };
+  });
+  return (
+    <svg viewBox={`0 0 64 ${height}`} {...deco} {...props}>
+      <path
+        d={`M31 ${height}Q34 ${height / 2} 32 4`}
+        fill="none"
+        className="stroke-sage-dark"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+      />
+      {leaflets.map(({ y, size }) => (
+        <g key={y}>
+          <path
+            d={leafPath(size, size * 0.27)}
+            transform={`translate(32 ${y}) rotate(-145)`}
+            {...inked('fill-sage', 0.6)}
+          />
+          <path
+            d={leafPath(size, size * 0.27)}
+            transform={`translate(32 ${y - 3}) rotate(-35)`}
+            {...inked('fill-sage', 0.6)}
+          />
+        </g>
+      ))}
+      <path d={leafPath(12, 2.6)} transform="translate(32 9) rotate(-90)" {...inked('fill-sage', 0.6)} />
+    </svg>
+  );
+}
+
+/** Wide terracotta tile with a cream "U" hanging from its top edge. */
+export function UTile(props: Props) {
+  return (
+    <svg viewBox="0 0 66 42" {...deco} {...props}>
+      <rect x="1" y="1" width="64" height="40" rx="1.5" {...inked('fill-terracotta', 2)} />
+      <path d="M16 1v11a17 17 0 0 0 34 0V1" fill="none" className="stroke-cream-light" strokeWidth={7} />
+    </svg>
+  );
+}
+
+/** Cream tile with an eight-petal terracotta flower (bottom-right corner of the desktop mockup). */
+export function FloralTile(props: Props) {
+  return (
+    <svg viewBox="0 0 60 60" {...deco} {...props}>
+      <rect x="1" y="1" width="58" height="58" rx="1.5" {...inked('fill-cream-light', 2)} />
+      <g className="fill-terracotta">
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => (
+          <ellipse
+            key={a}
+            cx={30}
+            cy={i % 2 ? 15 : 12}
+            rx={i % 2 ? 4 : 5.5}
+            ry={i % 2 ? 7 : 10}
+            transform={`rotate(${a} 30 30)`}
+          />
+        ))}
+      </g>
+      <circle cx="30" cy="30" r="5" className="fill-mustard" />
     </svg>
   );
 }

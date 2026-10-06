@@ -12,7 +12,7 @@ import { fieldChanged } from '../model/checkoutSlice';
 import { useCheckoutField } from './useCheckoutField';
 
 const inputClass =
-  'block w-full rounded-[5px] border-[1.5px] border-ink bg-cream-light px-2 py-1 text-[16px] lg:py-px lg:text-[15.5px] font-medium tracking-wide text-ink tabular-nums outline-none transition-shadow placeholder:font-normal placeholder:uppercase focus:border-navy focus:ring-2 focus:ring-navy/25 aria-invalid:border-terracotta';
+  'block u-h-30 w-full u-rounded-5 border-[1.5px] border-ink bg-cream-light u-px-8 u-text-14 lg:h-[26px] lg:rounded-[5px] lg:px-2 lg:text-[15.5px] font-medium tracking-wide text-ink tabular-nums outline-none transition-shadow placeholder:font-normal placeholder:uppercase focus:border-navy focus:ring-2 focus:ring-navy/25 aria-invalid:border-terracotta';
 
 type BadgeState = 'idle' | 'active' | 'dim';
 
@@ -21,7 +21,7 @@ const badgeState = (brand: CardBrand, badge: CardBrand): BadgeState =>
 
 const badgeClass = (state: BadgeState) =>
   cn(
-    'flex h-[23px] w-[40px] items-center justify-center rounded-[3px] border-[1.5px] border-ink bg-cream-light transition-all duration-200',
+    'flex u-h-21 u-w-37 items-center justify-center rounded-[3px] border-[1.5px] border-ink bg-cream-light transition-all duration-200 lg:h-[23px] lg:w-[40px]',
     state === 'active' && 'ring-2 ring-navy ring-offset-1 ring-offset-sand',
     state === 'dim' && 'opacity-35 grayscale',
   );
@@ -36,25 +36,30 @@ export function CardDetails({ className }: { className?: string }) {
   const ids = { number: useId(), expiry: useId(), cvv: useId() };
 
   return (
-    <div className={cn('rounded-[8px] border-2 border-ink bg-sand px-2.5 pt-2 pb-2.5', className)}>
-      <div className="flex items-center gap-1.5">
+    <div
+      className={cn(
+        'u-rounded-8 border-2 border-ink bg-sand u-px-10 u-pt-8 u-pb-10 lg:rounded-[8px] lg:px-2.5 lg:pt-2 lg:pb-2.5',
+        className,
+      )}
+    >
+      <div className="flex items-center u-gap-6 lg:gap-1.5">
         {/* Echo of the selected radio from the mockup; the real control is above. */}
         <span
           aria-hidden
-          className="size-[15px] rounded-full border-[1.5px] border-ink bg-ink inset-ring-[2.5px] inset-ring-cream-light"
+          className="u-size-13 rounded-full border-[1.5px] border-ink bg-ink inset-ring-[2.5px] inset-ring-cream-light lg:size-[15px]"
         />
         <span className="sr-only">We accept Visa and Mastercard.</span>
         <span aria-hidden className={badgeClass(badgeState(brand, 'visa'))}>
-          <span className="text-[14px] font-extrabold tracking-tight text-navy-dark italic">VISA</span>
+          <span className="u-text-12.5 font-extrabold tracking-tight text-navy-dark italic lg:text-[14px]">VISA</span>
         </span>
         <span aria-hidden className={badgeClass(badgeState(brand, 'mastercard'))}>
-          <MastercardIcon className="h-[17px]" />
+          <MastercardIcon className="u-h-15 lg:h-[17px]" />
         </span>
       </div>
 
       <label
         htmlFor={ids.number}
-        className="mt-1 block text-[13px] leading-5 font-semibold uppercase lg:mt-0.5 lg:leading-4"
+        className="u-mt-6 block u-text-12 u-leading-18 font-semibold uppercase lg:mt-0.5 lg:text-[13px] lg:leading-4"
       >
         Card number
       </label>
@@ -75,7 +80,7 @@ export function CardDetails({ className }: { className?: string }) {
       />
       <FieldError id={`${ids.number}-error`} message={number.error} />
 
-      <div className="mt-2 grid grid-cols-2 gap-2.5 lg:mt-1.5">
+      <div className="u-mt-8 grid grid-cols-2 u-gap-10 lg:mt-1.5 lg:gap-2.5">
         <div>
           <label htmlFor={ids.expiry} className="sr-only">
             Expiration date, MM / YY

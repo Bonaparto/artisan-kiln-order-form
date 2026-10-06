@@ -47,7 +47,7 @@ export function QuantityInput({ tileId, tileName, quantity, autoFocus = false }:
   const missing = quantity === 0;
 
   return (
-    <Bracketed className={cn('h-[1.3em] text-[16px] sm:text-[18px] lg:text-[17px]', missing && 'text-terracotta')}>
+    <Bracketed className={cn('u-h-17 u-text-15.5 lg:h-[20px] lg:text-[20px]', missing && 'text-terracotta')}>
       <input
         ref={inputRef}
         type="text"
@@ -61,7 +61,11 @@ export function QuantityInput({ tileId, tileName, quantity, autoFocus = false }:
         onChange={(event) => setQuantity(Number(digitsOnly(event.target.value)))}
         onKeyDown={handleKeyDown}
         onFocus={(event) => event.currentTarget.select()}
-        className="w-[2.3em] rounded-[2px] bg-transparent text-center font-medium text-ink tabular-nums outline-none focus:bg-mustard-light/30"
+        className={cn(
+          'rounded-[2px] bg-transparent text-center leading-none font-medium text-ink tabular-nums outline-none focus:bg-mustard-light/30',
+          // The brackets hug the number: room for three digits, four when needed.
+          quantity >= 1000 ? 'w-[2em]' : 'w-[1.5em]',
+        )}
       />
     </Bracketed>
   );

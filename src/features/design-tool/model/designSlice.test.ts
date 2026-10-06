@@ -90,18 +90,18 @@ describe('moving tiles', () => {
 
   it('swaps two laid tiles', () => {
     let state = reducer(empty(), tilePlaced({ index: 0, tileId: 'alhambra' }));
-    state = reducer(state, tilePlaced({ index: 1, tileId: 'golden-weave' }));
+    state = reducer(state, tilePlaced({ index: 1, tileId: 'golden-herringbone' }));
     state = reducer(state, tileMoved({ from: 0, to: 1 }));
-    expect(state.cells.slice(0, 2)).toEqual(['golden-weave', 'alhambra']);
+    expect(state.cells.slice(0, 2)).toEqual(['golden-herringbone', 'alhambra']);
   });
 });
 
 describe('board-wide actions', () => {
   it('fills only the empty cells', () => {
     let state = reducer(empty(), tilePlaced({ index: 5, tileId: 'sun-arc' }));
-    state = reducer(state, emptyCellsFilled('sage-chevron'));
+    state = reducer(state, emptyCellsFilled('sage-herringbone'));
     expect(state.cells[5]).toBe('sun-arc');
-    expect(state.cells.filter((cell) => cell === 'sage-chevron')).toHaveLength(48);
+    expect(state.cells.filter((cell) => cell === 'sage-herringbone')).toHaveLength(48);
   });
 
   it('clears the board', () => {

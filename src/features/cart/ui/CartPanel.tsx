@@ -3,6 +3,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import type { TileId } from '@/entities/tile';
 import { AddTileButton } from './AddTileButton';
+import type { RenderSwatch } from './CartRow';
 import { CartTable } from './CartTable';
 import { CartTotals } from './CartTotals';
 
@@ -10,26 +11,25 @@ interface CartPanelProps {
   className?: string;
   /** Illustration shown next to "Add new tile to cart". */
   illustration?: ReactNode;
-  /** Extra content under the totals (e.g. the free-shipping hint on mobile). */
-  footer?: ReactNode;
+  renderSwatch?: RenderSwatch;
 }
 
 /** Cart table + "Add new tile" + boxed totals — the same block in both layouts. */
-export function CartPanel({ className, illustration, footer }: CartPanelProps) {
+export function CartPanel({ className, illustration, renderSwatch }: CartPanelProps) {
   const [justAdded, setJustAdded] = useState<TileId | null>(null);
   const addButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div className={className}>
-      <CartTable focusTileId={justAdded} onEmptied={() => addButtonRef.current?.focus()} />
-      <div className="mt-[3px] flex flex-wrap items-start justify-between gap-x-2 gap-y-1 lg:mt-px">
-        <div className="flex items-center">
+      <CartTable focusTileId={justAdded} onEmptied={() => addButtonRef.current?.focus()} renderSwatch={renderSwatch} />
+      <div className="flex items-start justify-between">
+        <div className="flex items-start u-pt-6 u-pl-7.5 lg:pt-[6px] lg:pl-[9px]">
           {illustration}
-          <AddTileButton ref={addButtonRef} onAdded={setJustAdded} className="mt-1.5 lg:mt-1" />
+          <AddTileButton ref={addButtonRef} onAdded={setJustAdded} />
         </div>
-        <CartTotals variant="boxed" className="mt-1 ml-auto" />
+        {/* The boxes hang off the table, sharing its bottom border. */}
+        <CartTotals variant="boxed" className="-mt-[1.5px]" />
       </div>
-      {footer}
     </div>
   );
 }

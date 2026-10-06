@@ -15,7 +15,7 @@ export function CustomerFields({ addressLines = 2, className }: { addressLines?:
   return (
     <div className={cn('flex flex-col', className)}>
       <LinedInput label="Customer name:" autoComplete="name" error={name.error} {...name.inputProps} />
-      <div className="flex gap-x-4">
+      <div className="flex u-gap-x-7 lg:gap-x-4">
         <LinedInput
           label="Phone:"
           type="tel"

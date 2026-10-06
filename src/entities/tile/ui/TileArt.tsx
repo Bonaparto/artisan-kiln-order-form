@@ -1,43 +1,28 @@
 import type { SVGProps } from 'react';
-import { getTile, type TileId } from '../model/catalog';
-import { TILE_ART } from './tile-art';
+import type { TileId } from '../model/catalog';
+import { TILE_ART, TILE_MOTIF, TILE_SWATCH, type ArtId } from './tile-art';
 
 interface TileArtProps extends Omit<SVGProps<SVGSVGElement>, 'children'> {
-  tileId: TileId;
-  /** Tiles per side: 1 renders a single tile, 2 a 2×2 swatch, and so on. */
-  repeat?: number;
-  /** Expose the tile name to assistive tech. Decorative by default. */
-  labelled?: boolean;
+  tileId: ArtId;
+  /**
+   * `tile` — the tile as laid on the board (default);
+   * `motif` — the icon in the cart's "Tile collection" column;
+   * `swatch` — the larger-scale pattern in the cart's "Item" column.
+   */
+  variant?: 'tile' | 'motif' | 'swatch';
 }
 
-/** A tile (or a seamless swatch of tiles) as inline SVG. */
-export function TileArt({ tileId, repeat = 1, labelled = false, ...svgProps }: TileArtProps) {
-  const art = TILE_ART[tileId];
-  const size = 100 / repeat;
+const pick = (tileId: ArtId, variant: TileArtProps['variant']) => {
+  if (variant === 'motif') return TILE_MOTIF[tileId as TileId] ?? TILE_ART[tileId];
+  if (variant === 'swatch') return TILE_SWATCH[tileId as TileId] ?? TILE_ART[tileId];
+  return TILE_ART[tileId];
+};
+
+/** A tile as inline SVG. Decorative: the controls around it carry the labels. */
+export function TileArt({ tileId, variant = 'tile', ...svgProps }: TileArtProps) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      preserveAspectRatio="xMidYMid slice"
-      role={labelled ? 'img' : undefined}
-      aria-label={labelled ? getTile(tileId).name : undefined}
-      aria-hidden={labelled ? undefined : true}
-      focusable="false"
-      {...svgProps}
-    >
-      {repeat === 1
-        ? art
-        : Array.from({ length: repeat * repeat }, (_, i) => (
-            <svg
-              key={i}
-              x={(i % repeat) * size}
-              y={Math.floor(i / repeat) * size}
-              width={size}
-              height={size}
-              viewBox="0 0 100 100"
-            >
-              {art}
-            </svg>
-          ))}
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden focusable="false" {...svgProps}>
+      {pick(tileId, variant)}
     </svg>
   );
 }

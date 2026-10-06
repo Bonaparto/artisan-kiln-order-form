@@ -17,6 +17,22 @@ interface AddTileButtonProps {
   ref?: Ref<HTMLButtonElement>;
 }
 
+/** The terracotta tile with an indigo diamond drawn on the button in the mockups. */
+function ClayDiamondTile({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className}>
+      <rect x="0.75" y="0.75" width="22.5" height="22.5" className="fill-terracotta stroke-ink" strokeWidth={1.5} />
+      <path
+        d="M12 3Q14 10 21 12Q14 14 12 21Q10 14 3 12Q10 10 12 3Z"
+        fill="none"
+        className="stroke-navy"
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /** "Add new tile to cart" plus the picker of catalog tiles that are not in the cart yet. */
 export function AddTileButton({ onAdded, className, ref }: AddTileButtonProps) {
   const dispatch = useAppDispatch();
@@ -44,15 +60,15 @@ export function AddTileButton({ onAdded, className, ref }: AddTileButtonProps) {
         title={allInCart ? 'Every tile in the catalog is already in your cart' : undefined}
         aria-haspopup="dialog"
         className={cn(
-          'flex shrink-0 items-center gap-1 rounded-[4px] border-[1.5px] border-ink bg-sand-dark/60 py-1 pr-2 pl-1.5 transition-colors hover:bg-sand-dark disabled:cursor-not-allowed disabled:opacity-50 sm:gap-1.5 sm:pr-2.5 sm:pl-2',
+          'flex u-h-25.5 shrink-0 items-center u-gap-4 rounded-[4px] border-[1.5px] border-ink bg-sand-dark/60 u-pr-6 u-pl-5 transition-colors hover:bg-sand-dark disabled:cursor-not-allowed disabled:opacity-50 lg:h-[31px] lg:gap-[5px] lg:pr-[8px] lg:pl-[7px]',
           className,
         )}
       >
-        <span aria-hidden className="text-[22px] leading-none font-semibold">
+        <span aria-hidden className="u-text-16 leading-none font-semibold lg:text-[21px]">
           +
         </span>
-        <TileArt tileId="clay-compass" className="size-[19px] shrink-0 border border-ink sm:size-[22px]" />
-        <span className="text-left text-[13.5px] leading-[0.95] font-semibold whitespace-nowrap uppercase sm:text-[16px] lg:text-[14.5px]">
+        <ClayDiamondTile className="u-mr-2 u-size-16 shrink-0 lg:mr-[2px] lg:size-[21px]" />
+        <span className="text-left u-text-11.5 leading-[0.92] font-semibold whitespace-nowrap uppercase lg:text-[15px]">
           Add new tile
           <br />
           to cart
