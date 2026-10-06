@@ -6,7 +6,8 @@ import { CheckoutForm } from '@/features/checkout/ui/CheckoutForm';
 import { CustomerFields, NotesField } from '@/features/checkout/ui/CustomerFields';
 import { PaymentDetailsMobile, PaymentMethodsMobile } from '@/features/checkout/ui/PaymentMethods';
 import { PlaceOrderButton } from '@/features/checkout/ui/PlaceOrderButton';
-import { HandWithTile, QuarterTile, TriangleTile } from '@/shared/illustrations';
+import { HandWithTile } from '@/shared/illustrations';
+import { MobileNotesDecor } from './decor/traced';
 import { cn } from '@/shared/lib/cn';
 
 /**
@@ -40,10 +41,7 @@ export function MobileOrderView({ className }: { className?: string }) {
 
       <div className="relative">
         <NotesField label="Project name / notes:" rows={2} className="u-mr-1.5 u-pl-5 u-text-14" />
-        <div aria-hidden className="pointer-events-none">
-          <TriangleTile className="absolute u-top-6 u-left-n-21 u-w-17" />
-          <QuarterTile tone="terracotta" className="absolute u-top-28 u-left-n-21 u-w-17" />
-        </div>
+        <MobileNotesDecor className="pointer-events-none absolute u-top-n-0.25 u-left-n-21.5 u-w-20" />
       </div>
 
       <PaymentDetailsMobile className="u-mt-28" />
